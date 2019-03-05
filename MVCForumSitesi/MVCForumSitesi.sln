@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.421
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCForumSitesi", "MVCForumSitesi\MVCForumSitesi.csproj", "{F0C4D070-6738-4EB4-89C6-20AF7E3CC864}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entity", "Entity\Entity.csproj", "{2EF622A2-F7BA-444B-8FF8-7C02E247E146}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F0C4D070-6738-4EB4-89C6-20AF7E3CC864}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0C4D070-6738-4EB4-89C6-20AF7E3CC864}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0C4D070-6738-4EB4-89C6-20AF7E3CC864}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0C4D070-6738-4EB4-89C6-20AF7E3CC864}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EF622A2-F7BA-444B-8FF8-7C02E247E146}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EF622A2-F7BA-444B-8FF8-7C02E247E146}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EF622A2-F7BA-444B-8FF8-7C02E247E146}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EF622A2-F7BA-444B-8FF8-7C02E247E146}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {99A3BFE0-5ADF-4402-A174-44063B292427}
+	EndGlobalSection
+EndGlobal
