@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BLL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,22 +9,26 @@ namespace MVCForumSitesi.Controllers
 {
     public class HomeController : Controller
     {
+        UnitOfWork _uw = new UnitOfWork();
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Pricing()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
+        }
+
+        public ActionResult Questions()
+        {
+            var list = _uw.Categories.GetAll();
+           
+            return View(list);
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
     }

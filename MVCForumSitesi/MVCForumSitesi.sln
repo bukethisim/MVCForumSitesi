@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCForumSitesi", "MVCForumS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entity", "Entity\Entity.csproj", "{2EF622A2-F7BA-444B-8FF8-7C02E247E146}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{4A342564-9FA5-4B18-BBE9-AC4A45ACD04B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{B3547A9A-6A19-462B-B802-B77CEA527915}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{2EF622A2-F7BA-444B-8FF8-7C02E247E146}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EF622A2-F7BA-444B-8FF8-7C02E247E146}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2EF622A2-F7BA-444B-8FF8-7C02E247E146}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A342564-9FA5-4B18-BBE9-AC4A45ACD04B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A342564-9FA5-4B18-BBE9-AC4A45ACD04B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A342564-9FA5-4B18-BBE9-AC4A45ACD04B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A342564-9FA5-4B18-BBE9-AC4A45ACD04B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3547A9A-6A19-462B-B802-B77CEA527915}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3547A9A-6A19-462B-B802-B77CEA527915}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3547A9A-6A19-462B-B802-B77CEA527915}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3547A9A-6A19-462B-B802-B77CEA527915}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
