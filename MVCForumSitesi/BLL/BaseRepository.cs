@@ -27,6 +27,10 @@ namespace BLL
             return _db.Set<T>().Find(id);
         }
 
+        public List<T> Search(Func<T, bool> query)
+        {
+            return _db.Set<T>().Where(query).ToList();
+        }
 
     }
 }

@@ -13,7 +13,7 @@ namespace Entity
     {
         public int Like { get; set; }
         public virtual List<Answer> Answers { get; set; }
-
+        public bool HasPhoto { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<Person> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

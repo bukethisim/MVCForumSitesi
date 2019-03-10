@@ -66,21 +66,32 @@
                         <div class="col-xs-11 text-right menu-1">
                             <ul>
                                 <li class="active">@Html.ActionLink("Anasayfa", "Index", "Home")</li>
-                                
-                                <li>@Html.ActionLink("Sorular","Questions","Home")</li>
-                                <li>@Html.ActionLink("Ücretli Hizmetler","Pricing","Home")</li>
+
+                                <li>@Html.ActionLink("Sorular", "Index", "Questions")</li>
+                                <li>@Html.ActionLink("Ücretli Hizmetler", "Pricing", "Home")</li>
                                 @*<li class="has-dropdown">
-                                    <a href="blog.html">Blog</a>
-                                    <ul class="dropdown">
-                                        <li><a href="#">Web Design</a></li>
-                                        <li><a href="#">eCommerce</a></li>
-                                        <li><a href="#">Branding</a></li>
-                                        <li><a href="#">API</a></li>
-                                    </ul>
-                                </li>*@
-                                <li>@Html.ActionLink("İletişim","Contact","Home")</li>
-                                <li class="btn-cta"><a href="#"><span>Giriş</span></a></li>
-                                <li class="btn-cta"><a href="#"><span>Create a Course</span></a></li>
+                                        <a href="blog.html">Blog</a>
+                                        <ul class="dropdown">
+                                            <li><a href="#">Web Design</a></li>
+                                            <li><a href="#">eCommerce</a></li>
+                                            <li><a href="#">Branding</a></li>
+                                            <li><a href="#">API</a></li>
+                                        </ul>
+                                    </li>*@
+                                <li>@Html.ActionLink("İletişim", "Contact", "Home")</li>
+
+                                @*<li class="btn-cta"><a href="#"><span>Create a Course</span></a></li>*@
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <li><p class="navbar-text">Merhaba @User.Identity.Name</p></li>
+                                    <li>
+                                        @Html.ActionLink("Çıkış yap", "LogOff", "Members")
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>@Html.ActionLink("Giriş", "Login", "Members")</li>
+                                }
                             </ul>
                         </div>
                     </div>
@@ -95,11 +106,12 @@
                     <div class="col-md-8 col-md-offset-2 text-center">
                         <div class="display-t">
                             <div class="display-tc animate-box" data-animate-effect="fadeIn">
-                                <h1>Başarı sadece bir adım uzaklıktadır. </h1>
+                                <h1>Başarı sadece bir adım uzaktadır. </h1>
                                 <h2>Adımın büyüklüğünü sen belirlersin.</h2>
                                 <p>
-                                <a class="btn btn-primary btn-lg btn-learn" href="#">Take A Course</a> 
-                                <a class="btn btn-primary btn-lg popup-vimeo btn-video" href="https://vimeo.com/channels/staffpicks/93951774"><i class="icon-play"></i> Watch Video</a></p>
+                                    <a class="btn btn-primary btn-lg btn-learn" href="#">Take A Course</a>
+                                    <a class="btn btn-primary btn-lg popup-vimeo btn-video" href="https://vimeo.com/channels/staffpicks/93951774"><i class="icon-play"></i> Watch Video</a>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -203,7 +215,7 @@
     <script src="~/Content/Theme/js/magnific-popup-options.js"></script>
     <!-- Main -->
     <script src="~/Content/Theme/js/main.js"></script>
- 
+
 </body>
 </html>
 

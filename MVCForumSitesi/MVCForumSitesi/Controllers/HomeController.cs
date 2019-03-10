@@ -20,13 +20,6 @@ namespace MVCForumSitesi.Controllers
             return View();
         }
 
-        public ActionResult Questions()
-        {
-            var list = _uw.Categories.GetAll();
-           
-            return View(list);
-        }
-
         public ActionResult Contact()
         {
             return View();
