@@ -192,6 +192,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Image\iconfinder_0602-question-mark_206748 %281%29.png" />
     <Content Include="Content\Theme\css\animate.css" />
     <Content Include="Content\Theme\css\bootstrap.css" />
     <Content Include="Content\Theme\css\flexslider.css" />
@@ -369,10 +370,13 @@
     <Content Include="Views\Questions\GetQuestions.cshtml" />
     <Content Include="Views\Members\Login.cshtml" />
     <Content Include="Views\Members\Register.cshtml" />
+    <Content Include="Views\Questions\CreateQuestion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Uploads\Members\" />
+    <Folder Include="Uploads\Questions\large\" />
+    <Folder Include="Uploads\Questions\thumb\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -16,11 +16,13 @@
                             <p>
                                 @item.CategoryName ile ilgili soruları görmek için
                                 <span>
-                                @Html.ActionLink("tıklayın", "GetQuestions", "Questions", new {@catid=item.Id }, new { @style = "color:oranged" })
+                                    @Html.ActionLink("tıklayın", "GetQuestions", "Questions", new { @catid = item.Id }, new { @style = "color:oranged" })
                                 </span>
                             </p>
 
-                            <p class="comment text-right"><a href="#"><i class="fas fa-question-circle"></i> @item.Questions.Count</a></p>
+                            <p class="comment text-right">
+                               <i class="fas fa-question-circle"></i> @item.Questions.Count 
+                            </p>
 
                         </div>
                     </div>

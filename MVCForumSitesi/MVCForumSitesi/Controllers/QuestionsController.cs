@@ -1,4 +1,5 @@
 ﻿using BLL;
+using Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,32 @@ namespace MVCForumSitesi.Controllers
             var cat = _uw.Categories.GetOne(catid);
             var list = _uw.Questions.Search(x => x.CategoryId == catid);
             return View(list);
+        }
+
+        [HttpGet]
+        public ActionResult CreateQuestion()
+        {
+            List<SelectListItem> categories= _uw.Categories.GetAll()
+              .Select(x => new SelectListItem()
+              {
+                  Text = x.CategoryName,
+                  Value = x.Id.ToString()
+              }).ToList();
+
+            categories.Insert(0, new SelectListItem()
+            {
+                Text = "Seçiniz",
+                Value = ""
+            });
+            ViewBag.Categories = categories;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateQuestion(Question question,HttpPostedFileBase image)
+        {
+           
+            return View();
         }
     }
 }

@@ -1,0 +1,79 @@
+﻿@using Entity.ViewModels
+@model QuestionCreateViewModel
+@{
+    ViewBag.Title = "CreateQuestion";
+}
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<div class="container bootstrap snippet" style="margin-top:850px;">
+    <div class="row">
+        @using (Html.BeginForm("CreateQuestions", "Questions", FormMethod.Post, new { @class = "form", @enctype = "multipart/form-data" }))
+        {
+            <div class="col-sm-1"></div>
+            <div class="col-sm-3">
+                <!--left col-->
+
+                <div class="text-center">
+                    <img src="~/Content/Image/iconfinder_0602-question-mark_206748 (1).png" class="avatar  img-thumbnail" alt="avatar" />
+                    <input type="file" class="text-center center-block file-upload">
+                </div><br>
+            </div><!--/col-3-->
+
+            <div class="col-sm-8">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="home">
+
+                        <div class="form-group">
+                            <div class="col-xs-8">
+                                @Html.LabelFor(x => x.Category, new { @class = "control-label" })
+                                @Html.DropDownListFor(x => x.Category, (IEnumerable<SelectListItem>)ViewBag.Categories)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-8">
+                                @Html.LabelFor(x => x.QuestionContent, new { @class = "control-label" })
+                                @Html.TextAreaFor(x => x.QuestionContent, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-8 text-right">
+                                <br>
+                                <button class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Kaydet</button>
+                            </div>
+                        </div>
+                    </div><!--/tab-pane-->
+
+                </div><!--/tab-pane-->
+            </div><!--/tab-content-->
+        }
+    </div><!--/col-9-->
+</div><!--/row-->
+
+<script>
+
+    $(document).ready(function () {
+
+
+        var readURL = function (input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('.avatar').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+
+        $(".file-upload").on('change', function () {
+            readURL(this);
+        });
+    });
+</script>

@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace Entity
 {
-   public class Question : IEntity
+    public class Question : IEntity
     {
         public int Id { get; set; }
         public string QuestionUrl { get; set; }
+        public string ThumbnailURL { get; set; }
         public string QuestionContent { get; set; }
         public string StudentId { get; set; }
         //public virtual Student Student { get; set; }

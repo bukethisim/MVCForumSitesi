@@ -67,25 +67,24 @@
                             <ul>
                                 <li class="active">@Html.ActionLink("Anasayfa", "Index", "Home")</li>
 
-                                <li>@Html.ActionLink("Sorular", "Index", "Questions")</li>
+                                <li class="has-dropdown"> 
+                                    @Html.ActionLink("Sorular", "Index","Questions") 
+                                    <ul class="dropdown">
+                                        <li>@Html.ActionLink("Soruları Gör","Index", "Questions")</li>
+                                        <li> @Html.ActionLink("Soru Ekle", "CreateQuestion", "Questions")</li>
+                                    </ul>
+                                </li>
                                 <li>@Html.ActionLink("Ücretli Hizmetler", "Pricing", "Home")</li>
-                                @*<li class="has-dropdown">
-                                        <a href="blog.html">Blog</a>
-                                        <ul class="dropdown">
-                                            <li><a href="#">Web Design</a></li>
-                                            <li><a href="#">eCommerce</a></li>
-                                            <li><a href="#">Branding</a></li>
-                                            <li><a href="#">API</a></li>
-                                        </ul>
-                                    </li>*@
                                 <li>@Html.ActionLink("İletişim", "Contact", "Home")</li>
-
-                                @*<li class="btn-cta"><a href="#"><span>Create a Course</span></a></li>*@
                                 @if (User.Identity.IsAuthenticated)
                                 {
-                                    <li><p class="navbar-text">Merhaba @User.Identity.Name</p></li>
-                                    <li>
-                                        @Html.ActionLink("Çıkış yap", "LogOff", "Members")
+                                    <li class="has-dropdown">
+                                        <a href="#"> Merhaba @User.Identity.Name</a>
+                                        <ul class="dropdown">
+                                            <li>@Html.ActionLink("Profili Düzenle", "Edit", "Members")</li>
+                                            <li>@Html.ActionLink("Çıkış yap", "LogOff", "Members")</li>
+
+                                        </ul>
                                     </li>
                                 }
                                 else
@@ -107,10 +106,15 @@
                         <div class="display-t">
                             <div class="display-tc animate-box" data-animate-effect="fadeIn">
                                 <h1>Başarı sadece bir adım uzaktadır. </h1>
-                                <h2>Adımın büyüklüğünü sen belirlersin.</h2>
+                                <h2>Adımının büyüklüğünü sen belirlersin.</h2>
                                 <p>
-                                    <a class="btn btn-primary btn-lg btn-learn" href="#">Take A Course</a>
-                                    <a class="btn btn-primary btn-lg popup-vimeo btn-video" href="https://vimeo.com/channels/staffpicks/93951774"><i class="icon-play"></i> Watch Video</a>
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        if (Request.Url.AbsolutePath == "/" || Request.Url.AbsolutePath == "/Questions")
+                                        {
+                                            @Html.ActionLink("Soru Ekle", "CreateQuestion", "Questions", null, new { @class = "btn btn-primary btn-lg btn-learn" })
+                                        }
+                                    }
                                 </p>
                             </div>
                         </div>
