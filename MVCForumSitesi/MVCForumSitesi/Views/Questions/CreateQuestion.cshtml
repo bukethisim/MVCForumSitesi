@@ -10,7 +10,7 @@
 
 <div class="container bootstrap snippet" style="margin-top:850px;">
     <div class="row">
-        @using (Html.BeginForm("CreateQuestions", "Questions", FormMethod.Post, new { @class = "form", @enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("CreateQuestion", "Questions", FormMethod.Post, new { @class = "form", @enctype = "multipart/form-data" }))
         {
             <div class="col-sm-1"></div>
             <div class="col-sm-3">
@@ -18,7 +18,8 @@
 
                 <div class="text-center">
                     <img src="~/Content/Image/iconfinder_0602-question-mark_206748 (1).png" class="avatar  img-thumbnail" alt="avatar" />
-                    <input type="file" class="text-center center-block file-upload">
+                    @*<input type="file" class="text-center center-block file-upload">*@
+                    @Html.TextBox("imagefile",null, new { @type = "file", @class = "text-center center-block file-upload" })
                 </div><br>
             </div><!--/col-3-->
 
@@ -28,8 +29,8 @@
 
                         <div class="form-group">
                             <div class="col-xs-8">
-                                @Html.LabelFor(x => x.Category, new { @class = "control-label" })
-                                @Html.DropDownListFor(x => x.Category, (IEnumerable<SelectListItem>)ViewBag.Categories)
+                                @Html.LabelFor(x => x.CategoryId, new { @class = "control-label" })
+                                @Html.DropDownListFor(x => x.CategoryId, (IEnumerable<SelectListItem>)ViewBag.Categories)
                             </div>
                         </div>
 

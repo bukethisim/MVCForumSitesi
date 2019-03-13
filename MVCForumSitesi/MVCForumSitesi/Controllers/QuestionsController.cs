@@ -1,7 +1,11 @@
 ﻿using BLL;
 using Entity;
+using Entity.ViewModels;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -21,6 +25,7 @@ namespace MVCForumSitesi.Controllers
 
         public ActionResult GetQuestions(int catid)
         {
+            ViewBag.Person = User.Identity.GetUserId();
             var cat = _uw.Categories.GetOne(catid);
             var list = _uw.Questions.Search(x => x.CategoryId == catid);
             return View(list);
@@ -29,7 +34,7 @@ namespace MVCForumSitesi.Controllers
         [HttpGet]
         public ActionResult CreateQuestion()
         {
-            List<SelectListItem> categories= _uw.Categories.GetAll()
+            List<SelectListItem> categories = _uw.Categories.GetAll()
               .Select(x => new SelectListItem()
               {
                   Text = x.CategoryName,
@@ -46,9 +51,54 @@ namespace MVCForumSitesi.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateQuestion(Question question,HttpPostedFileBase image)
+        public ActionResult CreateQuestion(QuestionCreateViewModel question,HttpPostedFileBase imagefile)
         {
-           
+            List<SelectListItem> categories = _uw.Categories.GetAll()
+              .Select(x => new SelectListItem()
+              {
+                  Text = x.CategoryName,
+                  Value = x.Id.ToString()
+              }).ToList();
+
+            categories.Insert(0, new SelectListItem()
+            {
+                Text = "Seçiniz",
+                Value = ""
+            });
+            ViewBag.Categories = categories;
+
+            Question q = new Question();
+            q.CategoryId = question.CategoryId;
+            q.QuestionContent = question.QuestionContent;
+            q.PersonId = User.Identity.GetUserId();
+
+            if (imagefile != null)
+            {
+                string path = Server.MapPath("/Uploads/Questions/");
+                string thumbpath = path + "thumb/";
+                string largepath = path + "large/";
+
+                imagefile.SaveAs(largepath +DateTime.Today.Millisecond+".jpg");
+
+                Image i = Image.FromFile(largepath + DateTime.Today.Millisecond + ".jpg");
+
+                Size s = new Size(400, 400);
+
+                Image small = ImageHelper.ResizeImage(i, s);
+
+                small.Save(thumbpath + imagefile.FileName);
+
+                i.Dispose();
+
+                //img src içinde göstereceğimiz için relative path kaydediyoruz.
+                q.QuestionUrl = "/Uploads/Questions/large/"  + imagefile.FileName;
+                q.ThumbnailURL = "/Uploads/Questions/thumb/" + imagefile.FileName;
+
+            } else
+                q.QuestionUrl = @"C:\Users\craft\Desktop\WA Benim yaptıklarım\MVCForumSitesi\MVCForumSitesi\MVCForumSitesi\Content\Image\iconfinder_0602-question-mark_206748 (1).png";
+
+            _uw.Questions.Add(q);
+            _uw.Complete();
             return View();
         }
     }

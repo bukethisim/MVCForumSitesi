@@ -12,6 +12,5 @@ namespace Entity
         public int Id { get; set; }
         public string CategoryName { get; set; }  
         public virtual List<Question> Questions { get; set; }
-        //public virtual List<Teacher> Teachers { get; set; }
     }
 }

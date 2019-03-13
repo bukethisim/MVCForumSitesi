@@ -13,8 +13,7 @@ namespace Entity
         public string QuestionUrl { get; set; }
         public string ThumbnailURL { get; set; }
         public string QuestionContent { get; set; }
-        public string StudentId { get; set; }
-        //public virtual Student Student { get; set; }
+        public string PersonId { get; set; }
         public virtual List<Answer> Answers { get; set; }
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; }

@@ -44,17 +44,7 @@ namespace DAL
                 .HasMany(x => x.Questions)
                 .WithRequired(x => x.Category)
                 .HasForeignKey(x => x.CategoryId);
-
-            //modelBuilder.Entity<Category>()
-            //   .HasMany(x => x.Teachers)
-            //   .WithRequired(x => x.Category)
-            //   .HasForeignKey(x => x.CategoryId);
-
-            //modelBuilder.Entity<Student>()
-            //  .HasMany(x => x.Questions)
-            //  .WithRequired(x => x.Student)
-            //  .HasForeignKey(x => x.StudentId);
-
+            
             modelBuilder.Entity<Question>()
              .HasMany(x => x.Answers)
              .WithRequired(x => x.Question)

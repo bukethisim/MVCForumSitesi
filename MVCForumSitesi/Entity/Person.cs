@@ -14,6 +14,8 @@ namespace Entity
         public int Like { get; set; }
         public virtual List<Answer> Answers { get; set; }
         public bool HasPhoto { get; set; }
+        public bool hasLesson { get; set; }
+        public virtual List<Question> Questions { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<Person> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -21,17 +23,6 @@ namespace Entity
             // Add custom user claims here
             return userIdentity;
         }
-    }
 
-    public class Teacher : Person
-    {
-        public bool hasLesson { get; set; }
-        public int CategoryId { get; set; }
-        //public virtual Category Category { get; set; }
-    }
-
-    public class Student : Person
-    {
-        public virtual List<Question> Questions { get; set; }
     }
 }
