@@ -52,12 +52,16 @@ namespace MVCForumSitesi.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken] 
-        public ActionResult Register(Person person, string Pass, HttpPostedFileBase img)
+        [ValidateAntiForgeryToken]
+        public ActionResult Register(Person person, string Pass, HttpPostedFileBase img, bool hasLesson)
         {
-            UserStore<Person> store = new UserStore<Person>(UnitOfWork.Create()); 
+            UserStore<Person> store = new UserStore<Person>(UnitOfWork.Create());
             UserManager<Person> manager = new UserManager<Person>(store);
             var result = manager.Create(person, Pass);
+            if (hasLesson == true)
+                person.hasLesson = true;
+            else
+                person.hasLesson = false;
             if (result.Succeeded)
             {
                 if (img != null)

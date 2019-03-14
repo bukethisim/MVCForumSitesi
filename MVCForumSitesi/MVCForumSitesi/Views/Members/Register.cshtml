@@ -1,5 +1,5 @@
-﻿@using Entity
-@model Person
+﻿@using Entity.ViewModels
+@model RegisterViewModel
 @{
     Layout = null;
 }
@@ -103,6 +103,31 @@
                     </div>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-md-3 field-label-responsive">
+                    @Html.LabelFor(x => x.hasLesson, new { @class = "control-label" })
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <div class="input-group-addon" style="width: 2.6rem"><i class="fas fa-graduation-cap"></i></div>
+                            @Html.RadioButton("hasLesson",false, new { @id = "student" })
+                            @Html.Label("Öğrenci", new { @for = "student" })
+                            @Html.RadioButton("hasLesson",true, new { @id = "teacher" })
+                            @Html.Label("Öğretmen", new { @for = "teacher" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-control-feedback">
+                        <span class="text-danger align-middle">
+                            <!-- Put name validation error messages here -->
+                        </span>
+                    </div>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-md-3 field-label-responsive">
                     @Html.LabelFor(x => x.Email, new { @class = "control-label" })
@@ -120,7 +145,6 @@
 
             <div class="row">
                 <div class="col-md-3 field-label-responsive">
-                    <label for="password">Password</label>
                     @Html.Label("Şifre", new { @class = "control-label" })
                 </div>
                 <div class="col-md-6">

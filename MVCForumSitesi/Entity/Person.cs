@@ -16,6 +16,7 @@ namespace Entity
         public bool HasPhoto { get; set; }
         public bool hasLesson { get; set; }
         public virtual List<Question> Questions { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<Person> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
