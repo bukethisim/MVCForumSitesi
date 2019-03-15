@@ -51,7 +51,7 @@ namespace MVCForumSitesi.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateQuestion(QuestionCreateViewModel question,HttpPostedFileBase imagefile)
+        public ActionResult CreateQuestion(QuestionCreateViewModel question, HttpPostedFileBase imagefile)
         {
             List<SelectListItem> categories = _uw.Categories.GetAll()
               .Select(x => new SelectListItem()
@@ -78,7 +78,7 @@ namespace MVCForumSitesi.Controllers
                 string thumbpath = path + "thumb/";
                 string largepath = path + "large/";
 
-                imagefile.SaveAs(largepath +DateTime.Today.Millisecond+".jpg");
+                imagefile.SaveAs(largepath + DateTime.Today.Millisecond + ".jpg");
 
                 Image i = Image.FromFile(largepath + DateTime.Today.Millisecond + ".jpg");
 
@@ -91,15 +91,40 @@ namespace MVCForumSitesi.Controllers
                 i.Dispose();
 
                 //img src içinde göstereceğimiz için relative path kaydediyoruz.
-                q.QuestionUrl = "/Uploads/Questions/large/"  + imagefile.FileName;
+                q.QuestionUrl = "/Uploads/Questions/large/" + imagefile.FileName;
                 q.ThumbnailURL = "/Uploads/Questions/thumb/" + imagefile.FileName;
 
-            } else
+            }
+            else
                 q.QuestionUrl = @"C:\Users\craft\Desktop\WA Benim yaptıklarım\MVCForumSitesi\MVCForumSitesi\MVCForumSitesi\Content\Image\iconfinder_0602-question-mark_206748 (1).png";
 
             _uw.Questions.Add(q);
             _uw.Complete();
             return View();
+        }
+
+        public JsonResult DeleteQuestion(int id)
+        {
+            try
+            {
+                var list = _uw.Answers.Search(x => x.QuestionId == id);
+                if (list.Count != 0)
+                {
+                    foreach (var item in list)
+                    {
+                        _uw.Answers.Delete(item.Id);
+                    }
+                    _uw.Complete();
+                }
+                _uw.Questions.Delete(id);
+                _uw.Complete();
+                return Json(true);
+            }
+            catch (Exception)
+            {
+                return Json(false);
+            }
+          
         }
     }
 }

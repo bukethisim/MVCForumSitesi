@@ -1,4 +1,6 @@
 ﻿using BLL;
+using Entity;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,9 +19,30 @@ namespace MVCForumSitesi.Controllers
             return View(list);
         }
 
+        [HttpGet]
         public ActionResult CreateAnswer(int questionid)
         {
+            var question = _uw.Questions.GetOne(questionid);
+            TempData["questionıd"] = question.Id;
+            TempData["catıd"] = question.CategoryId;
+            ViewBag.QuestionPic = question.ThumbnailURL;
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateAnswer(string answer)
+        {
+            Answer ans = new Answer();
+            ans.AnswerContent = answer;
+            ans.PersonId = User.Identity.GetUserId();
+            ans.QuestionId = (int)TempData["questionıd"];
+
+            _uw.Answers.Add(ans);
+            _uw.Complete();
+
+            var question = _uw.Questions.GetOne(ans.QuestionId);
+            ViewBag.QuestionPic = question.ThumbnailURL;
+            return RedirectToAction("GetAnswers", new { id = ans.QuestionId });
         }
     }
 }

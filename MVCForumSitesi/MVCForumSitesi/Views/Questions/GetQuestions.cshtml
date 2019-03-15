@@ -10,7 +10,7 @@
 
             @foreach (var item in Model)
             {
-                <div class="col-lg-4 col-md-4">
+                <div class="col-lg-4 col-md-4 cart @item.Id" value="@item.Id">
                     <div class="fh5co-blog animate-box">
                         <a href="#"><img class="img-responsive" src="@item.ThumbnailURL" alt=""></a>
                         <div class="blog-text">
@@ -26,7 +26,7 @@
                             <div class="row">
                                 @if (item.PersonId == ViewBag.Person)
                                 {
-                                    <div class="comment col-md-6 text-left "><i class="far fa-trash-alt"></i></div>
+                                    <div class="comment col-md-6 text-left "><i value="@item.Id" class="far fa-trash-alt delete"></i></div>
                                 }
 
                                 <div class="comment colmd-6 text-right "><a href="/Answers/GetAnswers/@item.Id"><i class="far fa-comment-alt"></i>@item.Answers.Count</a></div>
@@ -39,3 +39,25 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(".delete").click(function () {
+        var id = $(this).attr("value");
+        $.ajax({
+            url: "/Questions/DeleteQuestion/" + id,
+            method: "POST",
+            success: function (result) {
+                if (result) {
+                    $(".cart").each(function () {
+                        if ($(this).hasClass(id)) {
+                            $(this).fadeOut("normal");
+                        }
+                    });
+                } else {
+                    alert("Bir hata oluştu, işleminiz gerçekleştirilemedi.")
+                }
+            }
+        })
+    })
+
+</script>
