@@ -15,7 +15,9 @@ namespace MVCForumSitesi.Controllers
         UnitOfWork _uw = new UnitOfWork();
         public ActionResult GetAnswers(int id)
         {
-           var list = _uw.Answers.Search(x => x.QuestionId == id);
+            Question q = _uw.Questions.GetOne(id);
+            ViewBag.Image = q.ThumbnailURL;
+            var list = _uw.Answers.Search(x => x.QuestionId == id);
             return View(list);
         }
 

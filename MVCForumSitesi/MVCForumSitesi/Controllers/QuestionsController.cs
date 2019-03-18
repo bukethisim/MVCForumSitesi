@@ -77,22 +77,25 @@ namespace MVCForumSitesi.Controllers
                 string path = Server.MapPath("/Uploads/Questions/");
                 string thumbpath = path + "thumb/";
                 string largepath = path + "large/";
+                string unique = DateTime.Now.Millisecond.ToString();
+                string guid = Guid.NewGuid().ToString();
 
-                imagefile.SaveAs(largepath + DateTime.Today.Millisecond + ".jpg");
+                imagefile.SaveAs(largepath + guid + unique + ".jpg");
 
-                Image i = Image.FromFile(largepath + DateTime.Today.Millisecond + ".jpg");
+                Image i = Image.FromFile(largepath +
+                   guid + unique + ".jpg");
 
                 Size s = new Size(400, 400);
 
                 Image small = ImageHelper.ResizeImage(i, s);
 
-                small.Save(thumbpath + imagefile.FileName);
+                small.Save(thumbpath + guid + unique + ".jpg");
 
                 i.Dispose();
 
                 //img src içinde göstereceğimiz için relative path kaydediyoruz.
-                q.QuestionUrl = "/Uploads/Questions/large/" + imagefile.FileName;
-                q.ThumbnailURL = "/Uploads/Questions/thumb/" + imagefile.FileName;
+                q.QuestionUrl = "/Uploads/Questions/large/" + guid + unique + ".jpg";
+                q.ThumbnailURL = "/Uploads/Questions/thumb/" + guid + unique + ".jpg";
 
             }
             else
@@ -124,7 +127,7 @@ namespace MVCForumSitesi.Controllers
             {
                 return Json(false);
             }
-          
+
         }
     }
 }

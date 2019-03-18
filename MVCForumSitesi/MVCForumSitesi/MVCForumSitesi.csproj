@@ -174,6 +174,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdministratorController.cs" />
     <Compile Include="Controllers\AnswersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -374,9 +375,13 @@
     <Content Include="Views\Questions\CreateQuestion.cshtml" />
     <Content Include="Views\Answers\CreateAnswer.cshtml" />
     <Content Include="Views\Answers\GetAnswers.cshtml" />
+    <Content Include="Views\Administrator\Categories.cshtml" />
+    <Content Include="Views\Administrator\CreateCategories.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Uploads\Categories\CategoriesImageUrl\" />
+    <Folder Include="Uploads\Categories\image\" />
     <Folder Include="Uploads\Members\" />
     <Folder Include="Uploads\Questions\large\" />
     <Folder Include="Uploads\Questions\thumb\" />

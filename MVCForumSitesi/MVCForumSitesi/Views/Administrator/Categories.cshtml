@@ -1,0 +1,25 @@
+﻿@using Entity
+@model List<Category>
+@{
+    ViewBag.Title = "Categories";
+}
+
+<div class="container">
+    @Html.ActionLink("Kategori Ekle", "CreateCategories")
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Kategori Görseli</th>
+            <th>Kategori Adı</th>
+            <th>İşlem</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td><img src="@item.CategoryImageUrl" /></td>
+                <td>@item.CategoryName</td>
+                <td><a href="#">X</a></td>
+            </tr>
+        }
+    </table>
+</div>
+
