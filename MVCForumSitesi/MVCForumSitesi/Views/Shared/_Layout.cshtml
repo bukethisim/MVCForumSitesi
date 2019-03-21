@@ -70,10 +70,10 @@
                             <ul>
                                 <li class="active">@Html.ActionLink("Anasayfa", "Index", "Home")</li>
 
-                                <li class="has-dropdown"> 
-                                    @Html.ActionLink("Sorular", "Index","Questions") 
+                                <li class="has-dropdown">
+                                    @Html.ActionLink("Sorular", "Index", "Questions")
                                     <ul class="dropdown">
-                                        <li>@Html.ActionLink("Soruları Gör","Index", "Questions")</li>
+                                        <li>@Html.ActionLink("Soruları Gör", "Index", "Questions")</li>
                                         <li> @Html.ActionLink("Soru Ekle", "CreateQuestion", "Questions")</li>
                                     </ul>
                                 </li>
@@ -81,6 +81,10 @@
                                 <li>@Html.ActionLink("İletişim", "Contact", "Home")</li>
                                 @if (User.Identity.IsAuthenticated)
                                 {
+                                    if (User.IsInRole("Administrator"))
+                                    {
+                                        <li>@Html.ActionLink("Kategori Düzenle", "Categories", "Administrator")</li>
+                                    }
                                     <li class="has-dropdown">
                                         <a href="#"> Merhaba @User.Identity.Name</a>
                                         <ul class="dropdown">
@@ -89,6 +93,7 @@
 
                                         </ul>
                                     </li>
+
                                 }
                                 else
                                 {

@@ -10,14 +10,16 @@
         <tr>
             <th>Kategori Görseli</th>
             <th>Kategori Adı</th>
-            <th>İşlem</th>
+            <th>Düzenle</th>
+            <th>Sil</th>
         </tr>
         @foreach (var item in Model)
         {
             <tr>
                 <td><img src="@item.CategoryImageUrl" /></td>
                 <td>@item.CategoryName</td>
-                <td><a href="#">X</a></td>
+                <td><a href="/Administrator/Edit/@item.Id"><i class="fas fa-edit"></i></a></td>
+                <td><a href="/Administrator/Delete/@item.Id"><i class="far fa-minus-square"></i></a></td>
             </tr>
         }
     </table>

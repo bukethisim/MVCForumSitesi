@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace MVCForumSitesi.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class AdministratorController : Controller
     {
         UnitOfWork _uw = new UnitOfWork();
@@ -55,6 +56,36 @@ namespace MVCForumSitesi.Controllers
                 c.CategoryImageUrl = @"\Content\Theme\images\project-4.jpg";
 
             _uw.Categories.Add(c);
+            _uw.Complete();
+            return RedirectToAction("Categories");
+        }
+
+        public ActionResult Delete(int id)
+        {
+            Category selected = _uw.Categories.GetOne(id);
+            var selectedQuestions = _uw.Questions.Search(x => x.CategoryId == id);
+            var path = Server.MapPath("/");
+            foreach (var question in selectedQuestions)
+            {
+                var selectedAnswers = _uw.Answers.Search(x => x.QuestionId == question.Id);
+
+                foreach (var answer in selectedAnswers)
+                {
+                    _uw.Answers.Delete(answer.Id);
+                }
+
+                var l = path + question.QuestionUrl;
+                var t = path + question.ThumbnailURL;
+
+                System.IO.File.Delete(l);
+                System.IO.File.Delete(t);
+                _uw.Questions.Delete(question.Id);
+            }
+
+            var lc = path + selected.CategoryImageUrl;
+            System.IO.File.Delete(lc);
+
+            _uw.Categories.Delete(id);
             _uw.Complete();
             return RedirectToAction("Categories");
         }

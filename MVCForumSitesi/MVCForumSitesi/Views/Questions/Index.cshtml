@@ -9,7 +9,14 @@
             {
                 <div class="col-lg-4 col-md-4">
                     <div class="fh5co-blog animate-box">
-                        <a href="#"><img class="img-responsive" src="~/Content/Theme/images/project-4.jpg" alt=""></a>
+                        @if (item.CategoryImageUrl == null)
+                        {
+                            <img class="img-responsive" src="~/Content/Theme/images/project-4.jpg" alt="CategoryImage">
+                        }
+                        else
+                        {
+                            <img class="img-responsive" src="@item.CategoryImageUrl" alt="CategoryImage">
+                        }
                         <div class="blog-text">
                             <h3>@item.CategoryName</h3>
 
@@ -21,7 +28,7 @@
                             </p>
 
                             <p class="comment text-right">
-                               <i class="fas fa-question-circle"></i> @item.Questions.Count 
+                                <i class="fas fa-question-circle"></i> @item.Questions.Count
                             </p>
 
                         </div>
