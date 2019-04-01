@@ -26,7 +26,7 @@
                         <div class="form-group">
                             <div class="col-xs-8">
 
-                                @Html.TextArea("ans", item.AnswerContent, new { @class = "form-control", @readonly = "yes", @style="resize:none" })
+                                @Html.TextArea("ans", item.AnswerContent, new { @class = "form-control", @readonly = "yes", @style = "resize:none" })
                                 <p class="text-right">@item.Person.UserName</p>
                             </div>
                         </div>
@@ -35,6 +35,27 @@
             </div>
         }
     </div><!--/row-->
+    <div class="row text-center">
+        @if (ViewBag.PrevVisible)
+        {
+            <a href="?id=@ViewBag.questionId&page=@Html.Raw(ViewBag.CurrentPage-1)">Önceki</a>
+        }
+
+        @{
+            string c = string.Empty;
+        }
+        @for (int i = ViewBag.Start; i <= ViewBag.End; i++)
+        {
+            c = i == ViewBag.CurrentPage ? "active" : string.Empty;
+            <a href="/Answers/GetAnswers?id=@ViewBag.questionId&page=@i" class="@c pagination">@i</a>
+
+        }
+        @if (ViewBag.NextVisible)
+        {
+            <a href="?id=@ViewBag.questionId&page=@Html.Raw(ViewBag.CurrentPage+1)">Sonraki</a>
+        }
+
+    </div>
 </div>
 
 

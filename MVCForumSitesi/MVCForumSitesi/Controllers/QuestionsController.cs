@@ -23,11 +23,31 @@ namespace MVCForumSitesi.Controllers
             return View(list);
         }
 
-        public ActionResult GetQuestions(int catid)
+        public ActionResult GetQuestions(int catid, int? page)
         {
             ViewBag.Person = User.Identity.GetUserId();
             var cat = _uw.Categories.GetOne(catid);
-            var list = _uw.Questions.Search(x => x.CategoryId == catid);
+            ViewBag.catId = catid;
+            List<Question> list; /*= _uw.Questions.Search(x => x.CategoryId == catid);*/
+            if (page.HasValue)
+            {
+                int step = (page.Value - 1) * 3; //nullable ise .value alarak işlem yaparız.
+                list = _uw.Questions.Search(x => x.CategoryId == catid).Skip(step).Take(3).ToList();
+            }
+            else
+            {
+                list = _uw.Questions.Search(x=> x.CategoryId == catid).Take(3).ToList();
+            }
+            float QuestionCount = _uw.Questions.GetAll().Count();
+            double PageCount = Math.Ceiling(QuestionCount / 3);
+            int current = page.HasValue ? page.Value : 1;
+
+            ViewBag.Start = current > 2 ? current - 2 : 1;
+            ViewBag.End = current < PageCount - 2 ? current + 2 : PageCount;
+            ViewBag.CurrentPage = current;
+
+            ViewBag.PrevVisible = current > 1;
+            ViewBag.NextVisible = current < PageCount;
             return View(list);
         }
 

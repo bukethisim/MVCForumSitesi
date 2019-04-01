@@ -38,6 +38,27 @@
 
         </div>
     </div>
+    <div class="row text-center">
+        @if (ViewBag.PrevVisible)
+        {
+            <a href="?catid=@ViewBag.catId&page=@Html.Raw(ViewBag.CurrentPage-1)">Önceki</a>
+        }
+
+        @{
+            string c = string.Empty;
+        }
+        @for (int i = ViewBag.Start; i <= ViewBag.End; i++)
+        {
+            c = i == ViewBag.CurrentPage ? "active" : string.Empty;
+            <a href="/Questions/GetQuestions?catid=@ViewBag.catId&page=@i" class="@c pagination">@i</a>
+
+        }
+        @if (ViewBag.NextVisible)
+        {
+            <a href="?catid=@ViewBag.catId&page=@Html.Raw(ViewBag.CurrentPage+1)">Sonraki</a>
+        }
+
+    </div>
 </div>
 
 <script>

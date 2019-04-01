@@ -80,11 +80,9 @@
                                 <h3>@item.QuestionContent</h3>
 
                                 <div class="row">
-                                    @if (item.PersonId == ViewBag.Person)
-                                    {
+                                   
                                         <div class="comment col-md-6 text-left "><i value="@item.Id" class="far fa-trash-alt delete"></i></div>
-                                    }
-
+                                    
                                     <div class="comment colmd-6 text-right "><a href="/Answers/GetAnswers/@item.Id"><i class="far fa-comment-alt"></i>@item.Answers.Count</a></div>
                                 </div>
                             </div>
@@ -115,4 +113,24 @@
             readURL(this);
         });
     });
+
+    $(".delete").click(function () {
+        var id = $(this).attr("value");
+        $.ajax({
+            url: "/Questions/DeleteQuestion/" + id,
+            method: "POST",
+            success: function (result) {
+                if (result) {
+                    $(".cart").each(function () {
+                        if ($(this).hasClass(id)) {
+                            $(this).fadeOut("normal");
+                        }
+                    });
+                } else {
+                    alert("Bir hata oluştu, işleminiz gerçekleştirilemedi.")
+                }
+            }
+        })
+    })
+
 </script>
