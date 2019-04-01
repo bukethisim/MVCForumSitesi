@@ -14,6 +14,7 @@ namespace MVCForumSitesi.Controllers
 {
     public class MembersController : Controller
     {
+        UnitOfWork _uw = new UnitOfWork();
         // GET: Members
         public ActionResult Index()
         {
@@ -79,6 +80,50 @@ namespace MVCForumSitesi.Controllers
             {
                 ViewBag.Errors = result.Errors;
             }
+            return View();
+        }
+
+        public ActionResult Edit()
+        {
+            var id = User.Identity.GetUserId();
+            ViewBag.Id = id;
+            ViewBag.Questions = _uw.Questions.Search(x => x.PersonId == id);
+            ViewBag.Photo = "/Uploads/Members/" + id + ".jpg";
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Edit(string email,string phone,HttpPostedFileBase image)
+        {
+            var id = User.Identity.GetUserId();
+            ViewBag.Id = id;
+            ViewBag.Questions = _uw.Questions.Search(x => x.PersonId == id);
+            ViewBag.Photo = "/Uploads/Members/" + id + ".jpg";
+
+            UserStore <Person> store = new UserStore<Person>(UnitOfWork.Create());
+            UserManager<Person> manager = new UserManager<Person>(store);
+            Person person = manager.FindById(id);  /*_uw.db.Users.Find(uid); aynı db kullanmamız gerekiyor.ondan managerdan aldık.*/
+            person.Email = email;
+            person.PhoneNumber = phone;
+            if (image != null)
+            {
+                string path = Server.MapPath("/Uploads/Members/");
+                string old = path + person.Id + ".jpg";
+
+                if (System.IO.File.Exists(old))
+                    System.IO.File.Delete(old);
+
+                string _new = path + person.Id + ".jpg";
+                image.SaveAs(_new);
+
+                person.HasPhoto = true;
+            }
+
+            manager.Update(person);
+
+            if (person.HasPhoto)
+                ViewBag.Photo = "/Uploads/Members/" + id + ".jpg";
+
             return View();
         }
 
